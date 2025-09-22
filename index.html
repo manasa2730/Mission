@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Ambulance Routing System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #d32f2f;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Smart Ambulance Routing</h1>
+    <div class="container">
+        <label for="ambulanceLocation">Ambulance Location:</label><br>
+        <input type="text" id="ambulanceLocation" placeholder="Enter current location"><br>
+
+        <label for="hospital">Select Hospital:</label><br>
+        <select id="hospital">
+            <option value="City Hospital">City Hospital</option>
+            <option value="Green Valley Hospital">Green Valley Hospital</option>
+            <option value="St. Mary’s Hospital">St. Mary’s Hospital</option>
+        </select><br>
+
+        <button onclick="findRoute()">Find Fastest Route</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function findRoute() {
+            const ambulanceLocation = document.getElementById('ambulanceLocation').value;
+            const hospital = document.getElementById('hospital').value;
+
+            if (!ambulanceLocation) {
+                alert('Please enter ambulance location!');
+                return;
+            }
+
+            // Mock route calculation (replace with real API in future)
+            const estimatedTime = Math.floor(Math.random() * 20) + 5; // Random 5-25 mins
+            const greenLightPath = Math.random() > 0.5 ? "Yes" : "No";
+
+            document.getElementById('result').innerHTML = `
+                🚑 Ambulance Location: <b>${ambulanceLocation}</b><br>
+                🏥 Hospital: <b>${hospital}</b><br>
+                ⏱ Estimated Time: <b>${estimatedTime} mins</b><br>
+                🟢 Green-Light Route: <b>${greenLightPath}</b>
+            `;
+        }
+    </script>
+</body>
+</html>
