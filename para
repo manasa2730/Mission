@@ -1,2 +1,1 @@
-hi
-hello
+The Smart Ambulance Routing System is a web application designed to help ambulances reach hospitals as quickly as possible by considering real-time traffic conditions and traffic signal statuses. By integrating live traffic data and analyzing which routes have green lights, the system selects the fastest and safest path for emergency vehicles. This reduces delays, improves response times, and can potentially save lives during critical medical emergencies. It also allows hospitals to be notified in advance, ensuring they are prepared for incoming patients.
