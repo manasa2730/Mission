@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Smart Home Dashboard</title>
+  <style>
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto;background:#0d1117;color:#e6edf3}
+    header{padding:16px;text-align:center;background:#161b22}
+    h1{margin:0;font-size:20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:16px}
+    .card{background:#161b22;padding:16px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+    h2{margin-top:0;font-size:16px}
+    button{padding:8px 12px;border:none;border-radius:8px;cursor:pointer;background:#238636;color:#fff;font-weight:600}
+    button.off{background:#d73a49}
+    .device-status{margin-top:8px;font-size:14px;color:#8b949e}
+    .energy{font-size:28px;font-weight:bold;margin-top:8px}
+    .weather{display:flex;align-items:center;gap:8px;font-size:14px}
+    .reminders ul{padding-left:20px;margin:0}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏠 Smart Home Dashboard</h1>
+  </header>
+
+  <main class="grid">
+    <div class="card">
+      <h2>Lights</h2>
+      <button id="lightBtn">Turn On</button>
+      <div class="device-status" id="lightStatus">Status: Off</div>
+    </div>
+
+    <div class="card">
+      <h2>Fan</h2>
+      <button id="fanBtn">Turn On</button>
+      <div class="device-status" id="fanStatus">Status: Off</div>
+    </div>
+
+    <div class="card">
+      <h2>AC</h2>
+      <button id="acBtn">Turn On</button>
+      <div class="device-status" id="acStatus">Status: Off</div>
+    </div>
+
+    <div class="card">
+      <h2>Smart Plug</h2>
+      <button id="plugBtn">Turn On</button>
+      <div class="device-status" id="plugStatus">Status: Off</div>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Energy Usage</h2>
+      <div class="energy" id="energyUsage">0.00 kWh</div>
+    </div>
+
+    <div class="card">
+      <h2>☁ Weather</h2>
+      <div class="weather" id="weather">Loading...</div>
+    </div>
+
+    <div class="card reminders">
+      <h2>📝 Reminders</h2>
+      <ul id="reminderList">
+        <li>Pay electricity bill</li>
+        <li>Water the plants</li>
+        <li>Take out the trash</li>
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    // Device control simulation
+    function toggleDevice(btnId, statusId, deviceName){
+      const btn = document.getElementById(btnId);
+      const status = document.getElementById(statusId);
+      let on = false;
+      btn.addEventListener('click', ()=>{
+        on = !on;
+        status.textContent = Status: ${on ? 'On' : 'Off'};
+        btn.textContent = on ? 'Turn Off' : 'Turn On';
+        btn.className = on ? 'off' : '';
+        console.log(${deviceName} is now ${on?'On':'Off'});
+      });
+    }
+
+    toggleDevice('lightBtn','lightStatus','Light');
+    toggleDevice('fanBtn','fanStatus','Fan');
+    toggleDevice('acBtn','acStatus','AC');
+    toggleDevice('plugBtn','plugStatus','Smart Plug');
+
+    // Simulated energy usage update
+    const energyEl = document.getElementById('energyUsage');
+    setInterval(()=>{
+      const usage = (Math.random()*5+1).toFixed(2);
+      energyEl.textContent = usage+" kWh";
+    }, 3000);
+
+    // Weather API demo (mock)
+    const weatherEl = document.getElementById('weather');
+    async function loadWeather(){
+      try{
+        // In real app, use fetch with OpenWeather API
+        // Here we simulate
+        const temp = (Math.random()*10+25).toFixed(1);
+        const conditions = ["Sunny","Cloudy","Rainy"][Math.floor(Math.random()*3)];
+        weatherEl.textContent = ${temp}°C, ${conditions};
+      }catch(e){
+        weatherEl.textContent = 'Failed to load weather';
+      }
+    }
+    loadWeather();
+    setInterval(loadWeather, 10000);
+  </script>
+</body>
+</html>
